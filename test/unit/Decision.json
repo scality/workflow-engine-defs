@@ -1,0 +1,218 @@
+{
+  "offsetX": 0,
+  "offsetY": 0,
+  "zoom": 100,
+  "links": [
+    {
+      "id": "e6d3411b-400c-4bbc-8064-216d9c7d9139",
+      "_class": "LinkModel",
+      "selected": false,
+      "type": "default",
+      "source": "80561b2f-b93b-4e6e-b187-1033005b6c09",
+      "sourcePort": "8ad463ac-56f9-43a4-9ced-47a188aac5fb",
+      "target": "73594f64-8aa4-484f-aa93-9d3ae4ea242f",
+      "targetPort": "f58d40ff-a95e-4403-8e87-d51c78615af6",
+      "points": [
+        {
+          "id": "3d20c242-c85c-4663-8f94-3b0d8e3aef29",
+          "_class": "PointModel",
+          "selected": false,
+          "x": 167.453125,
+          "y": 149.5
+        },
+        {
+          "id": "3a92ea60-ca9c-4a64-b313-c53d462c9da3",
+          "_class": "PointModel",
+          "selected": false,
+          "x": 218.5,
+          "y": 141.5
+        }
+      ],
+      "extras": {}
+    },
+    {
+      "id": "a8adcdfa-4720-4f44-b595-7c8ac9b93fa2",
+      "_class": "LinkModel",
+      "selected": false,
+      "type": "default",
+      "source": "73594f64-8aa4-484f-aa93-9d3ae4ea242f",
+      "sourcePort": "37062b78-0cf8-4e3b-b99d-4c6d859f7124",
+      "target": "c41f5dd0-419f-4ef6-a03f-789b46e85df0",
+      "targetPort": "ebb2669e-6c75-4811-bc21-038c37bd8ce0",
+      "points": [
+        {
+          "id": "6e66f7f8-aa39-4661-87c9-3fc2134033e4",
+          "_class": "PointModel",
+          "selected": false,
+          "x": 289.59375,
+          "y": 141.5
+        },
+        {
+          "id": "2f4a37c4-8161-4fba-a0b8-2d5763f51e92",
+          "_class": "PointModel",
+          "selected": false,
+          "x": 346.5,
+          "y": 130.5
+        }
+      ],
+      "extras": {}
+    },
+    {
+      "id": "588cf6d9-3eed-4dd5-a040-6751f8bd9fd1",
+      "_class": "LinkModel",
+      "selected": false,
+      "type": "default",
+      "source": "73594f64-8aa4-484f-aa93-9d3ae4ea242f",
+      "sourcePort": "a34db8bf-1f66-44a6-85ab-946aa1f54535",
+      "target": "4e885157-6a6e-4613-8931-94576a28d586",
+      "targetPort": "ccfe6239-5d12-4c1e-b116-8324a2ed5022",
+      "points": [
+        {
+          "id": "987cf7d0-946b-4485-bfa3-2b5dd1413ba0",
+          "_class": "PointModel",
+          "selected": false,
+          "x": 289.59375,
+          "y": 157.5
+        },
+        {
+          "id": "9b8d26f1-88e7-43d9-8d5e-1a83dc8d125a",
+          "_class": "PointModel",
+          "selected": false,
+          "x": 344.5,
+          "y": 204.5
+        }
+      ],
+      "extras": {}
+    }
+  ],
+  "nodes": [
+    {
+      "id": "80561b2f-b93b-4e6e-b187-1033005b6c09",
+      "_class": "SourceNodeModel",
+      "selected": false,
+      "type": "data",
+      "x": 96,
+      "y": 105,
+      "extras": {},
+      "ports": [
+        {
+          "id": "8ad463ac-56f9-43a4-9ced-47a188aac5fb",
+          "_class": "DefaultPortModel",
+          "selected": false,
+          "name": "output",
+          "parentNode": "80561b2f-b93b-4e6e-b187-1033005b6c09",
+          "links": [
+            "e6d3411b-400c-4bbc-8064-216d9c7d9139"
+          ],
+          "in": false,
+          "label": "Out"
+        }
+      ],
+      "name": "New Data",
+      "color": "rgb(157, 13, 193)",
+      "subType": "advanced",
+      "script": "true;"
+    },
+    {
+      "id": "73594f64-8aa4-484f-aa93-9d3ae4ea242f",
+      "_class": "DecisionNodeModel",
+      "selected": false,
+      "type": "decision",
+      "x": 209,
+      "y": 109,
+      "extras": {},
+      "ports": [
+        {
+          "id": "37062b78-0cf8-4e3b-b99d-4c6d859f7124",
+          "_class": "DefaultPortModel",
+          "selected": false,
+          "name": "output",
+          "parentNode": "73594f64-8aa4-484f-aa93-9d3ae4ea242f",
+          "links": [
+            "a8adcdfa-4720-4f44-b595-7c8ac9b93fa2"
+          ],
+          "in": false,
+          "label": "True"
+        },
+        {
+          "id": "f58d40ff-a95e-4403-8e87-d51c78615af6",
+          "_class": "DefaultPortModel",
+          "selected": false,
+          "name": "input",
+          "parentNode": "73594f64-8aa4-484f-aa93-9d3ae4ea242f",
+          "links": [
+            "e6d3411b-400c-4bbc-8064-216d9c7d9139"
+          ],
+          "in": true,
+          "label": "In"
+        },
+        {
+          "id": "a34db8bf-1f66-44a6-85ab-946aa1f54535",
+          "_class": "DefaultPortModel",
+          "selected": false,
+          "name": "output2",
+          "parentNode": "73594f64-8aa4-484f-aa93-9d3ae4ea242f",
+          "links": [
+            "588cf6d9-3eed-4dd5-a040-6751f8bd9fd1"
+          ],
+          "in": false,
+          "label": "False"
+        }
+      ],
+      "name": "Decision",
+      "color": "rgb(0, 192, 255)",
+      "subType": "advanced",  
+      "script": "true;"
+    },
+    {
+      "id": "c41f5dd0-419f-4ef6-a03f-789b46e85df0",
+      "_class": "StopperNodeModel",
+      "selected": false,
+      "type": "stopper",
+      "x": 337,
+      "y": 86,
+      "extras": {},
+      "ports": [
+        {
+          "id": "ebb2669e-6c75-4811-bc21-038c37bd8ce0",
+          "_class": "DefaultPortModel",
+          "selected": false,
+          "name": "input",
+          "parentNode": "c41f5dd0-419f-4ef6-a03f-789b46e85df0",
+          "links": [
+            "a8adcdfa-4720-4f44-b595-7c8ac9b93fa2"
+          ],
+          "in": true,
+          "label": "In"
+        }
+      ],
+      "name": "Untitled",
+      "color": "rgb(192, 255, 0)"
+    },
+    {
+      "id": "4e885157-6a6e-4613-8931-94576a28d586",
+      "_class": "StopperNodeModel",
+      "selected": false,
+      "type": "stopper",
+      "x": 335,
+      "y": 160,
+      "extras": {},
+      "ports": [
+        {
+          "id": "ccfe6239-5d12-4c1e-b116-8324a2ed5022",
+          "_class": "DefaultPortModel",
+          "selected": false,
+          "name": "input",
+          "parentNode": "4e885157-6a6e-4613-8931-94576a28d586",
+          "links": [
+            "588cf6d9-3eed-4dd5-a040-6751f8bd9fd1"
+          ],
+          "in": true,
+          "label": "In"
+        }
+      ],
+      "name": "Untitled",
+      "color": "rgb(192, 255, 0)"
+    }
+  ]
+}

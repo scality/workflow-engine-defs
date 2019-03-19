@@ -1,0 +1,91 @@
+{
+  "offsetX": 0,
+  "offsetY": 0,
+  "zoom": 100,
+  "nameCounter": 2,
+  "links": [
+    {
+      "id": "00a99bd0-d9e7-4a91-be78-40e7f552dadd",
+      "_class": "LinkModel",
+      "selected": false,
+      "type": "default",
+      "source": "71b8d9a2-19bb-4996-be09-83ca3563bdc9",
+      "sourcePort": "0f128db8-7e27-4ba1-a32f-caec62e6a090",
+      "target": "5473d8bb-e968-4bce-b0c7-fed3754d138d",
+      "targetPort": "7ac29327-6c66-476e-b2a8-72641cb3c2eb",
+      "points": [
+        {
+          "id": "6ee846b4-f04e-4c66-94dd-b17a86fcc183",
+          "_class": "PointModel",
+          "selected": false,
+          "x": 251.5,
+          "y": 196.5
+        },
+        {
+          "id": "01d55eea-4865-410a-9249-83288d882062",
+          "_class": "PointModel",
+          "selected": true,
+          "x": 180,
+          "y": 195
+        }
+      ],
+      "extras": {}
+    }
+  ],
+  "nodes": [
+    {
+      "id": "5473d8bb-e968-4bce-b0c7-fed3754d138d",
+      "_class": "DataNodeModel",
+      "selected": false,
+      "type": "data",
+      "x": 105,
+      "y": 143,
+      "extras": {},
+      "ports": [
+        {
+          "id": "7ac29327-6c66-476e-b2a8-72641cb3c2eb",
+          "_class": "DefaultPortModel",
+          "selected": false,
+          "name": "output",
+          "parentNode": "5473d8bb-e968-4bce-b0c7-fed3754d138d",
+          "links": [
+            "00a99bd0-d9e7-4a91-be78-40e7f552dadd"
+          ],
+          "in": false,
+          "label": "Out"
+        }
+      ],
+      "name": "data0",
+      "color": "rgb(157, 13, 193)",
+      "subType": "basic",
+      "key": "my-bucket",
+      "value": "*",
+      "script": "Bucket === 'my-bucket';"
+    },
+    {
+      "id": "71b8d9a2-19bb-4996-be09-83ca3563bdc9",
+      "_class": "StopperNodeModel",
+      "selected": false,
+      "type": "stopper",
+      "x": 242,
+      "y": 148,
+      "extras": {},
+      "ports": [
+        {
+          "id": "0f128db8-7e27-4ba1-a32f-caec62e6a090",
+          "_class": "DefaultPortModel",
+          "selected": false,
+          "name": "input",
+          "parentNode": "71b8d9a2-19bb-4996-be09-83ca3563bdc9",
+          "links": [
+            "00a99bd0-d9e7-4a91-be78-40e7f552dadd"
+          ],
+          "in": true,
+          "label": "In"
+        }
+      ],
+      "name": "stopper1",
+      "color": "rgb(192, 255, 0)"
+    }
+  ]
+}
