@@ -1,0 +1,66 @@
+{
+  "offsetX": 0,
+  "offsetY": 0,
+  "zoom": 100,
+  "nameCounter": 1,
+  "links": [
+    {
+      "id": "6d65e7cf-eeac-4db0-90cb-ab9504b8672d",
+      "_class": "LinkModel",
+      "selected": false,
+      "type": "default",
+      "source": "1ffe1826-6995-4323-8e8c-2e239144e320",
+      "sourcePort": "96cab15c-5276-4c60-b081-2cc390d36230",
+      "target": null,
+      "targetPort": null,
+      "points": [
+        {
+          "id": "7e0e2e53-bcf0-4065-bd74-bcd195bbf1b5",
+          "_class": "PointModel",
+          "selected": false,
+          "x": 158.6875,
+          "y": 163.5
+        },
+        {
+          "id": "fd2341ce-cecc-4cdc-97ca-50ace6f4c5e2",
+          "_class": "PointModel",
+          "selected": true,
+          "x": 298,
+          "y": 209
+        }
+      ],
+      "extras": {}
+    }
+  ],
+  "nodes": [
+    {
+      "id": "1ffe1826-6995-4323-8e8c-2e239144e320",
+      "_class": "DataNodeModel",
+      "selected": false,
+      "type": "data",
+      "x": 87,
+      "y": 115,
+      "extras": {},
+      "ports": [
+        {
+          "id": "96cab15c-5276-4c60-b081-2cc390d36230",
+          "_class": "DefaultPortModel",
+          "selected": false,
+          "name": "output",
+          "parentNode": "1ffe1826-6995-4323-8e8c-2e239144e320",
+          "links": [
+            "6d65e7cf-eeac-4db0-90cb-ab9504b8672d"
+          ],
+          "in": false,
+          "label": "Out"
+        }
+      ],
+      "name": "data0",
+      "color": "rgb(157, 13, 193)",
+      "subType": "basic",
+      "key": "my-bucket",
+      "value": "*",
+      "script": "Bucket === 'my-bucket';"
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+    "offsetX": 0,
+    "offsetY": 0,
+    "zoom": 100,
+    "links": [
+        {
+            "id": "34d8afa3-384d-4ac3-9351-711566833abd",
+            "_class": "LinkModel",
+            "selected": false,
+            "type": "default",
+            "source": "e8fccd53-e412-4793-806f-d920f8d45101",
+            "sourcePort": "0168c02a-2331-4e0b-92a0-df5e4e3ce616",
+            "target": "3e6052cc-4f19-4e86-854a-783905aa1ee2",
+            "targetPort": "09d5ffbc-707c-472a-a9ea-7e8dd929d2c2",
+            "points": [
+                {
+                    "id": "8fe3b3aa-5c3e-4ca4-8339-c94ea29ccd82",
+                    "_class": "PointModel",
+                    "selected": false,
+                    "x": 154.453125,
+                    "y": 78.5
+                },
+                {
+                    "id": "4d2fb0c0-71b0-4c00-83b4-083e324ad965",
+                    "_class": "PointModel",
+                    "selected": true,
+                    "x": 217,
+                    "y": 78
+                }
+            ],
+            "extras": {}
+        }
+    ],
+    "nodes": [
+        {
+            "id": "e8fccd53-e412-4793-806f-d920f8d45101",
+            "_class": "SourceNodeModel",
+            "selected": false,
+            "type": "data",
+            "x": 94,
+            "y": 46,
+            "extras": {},
+            "ports": [
+                {
+                    "id": "0168c02a-2331-4e0b-92a0-df5e4e3ce616",
+                    "_class": "DefaultPortModel",
+                    "selected": false,
+                    "name": "output",
+                    "parentNode":
+                    "e8fccd53-e412-4793-806f-d920f8d45101",
+                    "links": [
+                        "34d8afa3-384d-4ac3-9351-711566833abd"
+                    ],
+                    "in": false,
+                    "label": "Out"
+                }
+            ],
+            "name": "Untitled",
+            "color": "rgb(0, 192, 255)",
+            "subType": "advanced",
+            "script": "false;"
+        },
+        {
+            "id": "3e6052cc-4f19-4e86-854a-783905aa1ee2",
+            "_class": "StopperNodeModel",
+            "selected": false,
+            "type": "stopper",
+            "x": 204,
+            "y": 42,
+            "extras": {},
+            "ports": [
+                {
+                    "id": "09d5ffbc-707c-472a-a9ea-7e8dd929d2c2",
+                    "_class": "DefaultPortModel",
+                    "selected": false,
+                    "name": "input",
+                    "parentNode":
+                    "3e6052cc-4f19-4e86-854a-783905aa1ee2",
+                    "links": [
+                        "34d8afa3-384d-4ac3-9351-711566833abd"
+                    ],
+                    "in": true,
+                    "label": "In"
+                }
+            ],
+            "name": "Untitled",
+            "color": "rgb(192, 255, 0)"
+        }
+    ]
+}

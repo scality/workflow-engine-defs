@@ -1,0 +1,34 @@
+{
+    "offsetX": 0,
+    "offsetY": 0,
+    "zoom": 100,
+    "links": [],
+    "nodes": [
+        {
+            "id": "2dc1d477-770f-4ce8-8cff-e1a1a7d9b42a",
+            "_class": "SourceNodeModel",
+            "selected": false,
+            "type": "data",
+            "x": 121,
+            "y": 69,
+            "extras": {},
+            "ports": [
+                {
+                    "id": "bc7b64c3-fa8c-429d-81a9-06573c063bca",
+                    "_class": "DefaultPortModel",
+                    "selected": false,
+                    "name": "output",
+                    "parentNode":
+                    "2dc1d477-770f-4ce8-8cff-e1a1a7d9b42a",
+                    "links": [],
+                    "in": false,
+                    "label": "Out"
+                }
+            ],
+            "name": "Untitled",
+            "color": "rgb(0, 192, 255)",
+            "subType": "advanced",
+            "script": "false;"
+        }
+    ]
+}

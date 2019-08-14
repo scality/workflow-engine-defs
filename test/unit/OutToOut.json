@@ -1,0 +1,95 @@
+{
+  "offsetX": 0,
+  "offsetY": 0,
+  "zoom": 100,
+  "nameCounter": 2,
+  "links": [
+    {
+      "id": "8655c673-c423-4120-9034-2bbeaa0edbad",
+      "_class": "LinkModel",
+      "selected": false,
+      "type": "default",
+      "source": "b0b729ca-bbe0-48f9-b74f-0c0a4c126df7",
+      "sourcePort": "13ea239b-bb86-49c8-96b9-07b076d132bc",
+      "target": "97a83dfb-793f-4b2c-a074-031a440d31a6",
+      "targetPort": "d16c1a19-0de4-4a2d-8684-65e28ec4b0eb",
+      "points": [
+        {
+          "id": "0b12b436-315a-47ee-88c2-165bef4ffc34",
+          "_class": "PointModel",
+          "selected": false,
+          "x": 165.6875,
+          "y": 141.5
+        },
+        {
+          "id": "7042c8f9-fc1d-42fc-9074-59c57256da6d",
+          "_class": "PointModel",
+          "selected": true,
+          "x": 278,
+          "y": 208
+        }
+      ],
+      "extras": {}
+    }
+  ],
+  "nodes": [
+    {
+      "id": "b0b729ca-bbe0-48f9-b74f-0c0a4c126df7",
+      "_class": "DataNodeModel",
+      "selected": false,
+      "type": "data",
+      "x": 94,
+      "y": 93,
+      "extras": {},
+      "ports": [
+        {
+          "id": "13ea239b-bb86-49c8-96b9-07b076d132bc",
+          "_class": "DefaultPortModel",
+          "selected": false,
+          "name": "output",
+          "parentNode": "b0b729ca-bbe0-48f9-b74f-0c0a4c126df7",
+          "links": [
+            "8655c673-c423-4120-9034-2bbeaa0edbad"
+          ],
+          "in": false,
+          "label": "Out"
+        }
+      ],
+      "name": "data0",
+      "color": "rgb(157, 13, 193)",
+      "subType": "basic",
+      "key": "my-bucket",
+      "value": "*",
+      "script": "Bucket === 'my-bucket';"
+    },
+    {
+      "id": "97a83dfb-793f-4b2c-a074-031a440d31a6",
+      "_class": "DataNodeModel",
+      "selected": false,
+      "type": "data",
+      "x": 206,
+      "y": 157,
+      "extras": {},
+      "ports": [
+        {
+          "id": "d16c1a19-0de4-4a2d-8684-65e28ec4b0eb",
+          "_class": "DefaultPortModel",
+          "selected": false,
+          "name": "output",
+          "parentNode": "97a83dfb-793f-4b2c-a074-031a440d31a6",
+          "links": [
+            "8655c673-c423-4120-9034-2bbeaa0edbad"
+          ],
+          "in": false,
+          "label": "Out"
+        }
+      ],
+      "name": "data1",
+      "color": "rgb(157, 13, 193)",
+      "subType": "basic",
+      "key": "my-bucket",
+      "value": "*",
+      "script": "Bucket === 'my-bucket';"
+    }
+  ]
+}

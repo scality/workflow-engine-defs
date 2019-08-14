@@ -1,0 +1,87 @@
+{
+  "offsetX": 0,
+  "offsetY": 0,
+  "zoom": 100,
+  "nameCounter": 3,
+  "links": [
+    {
+      "id": "bebdc0e6-7cfa-42cb-840d-5c144359710f",
+      "_class": "LinkModel",
+      "selected": false,
+      "type": "default",
+      "source": "7706d1e3-a6dd-469e-9d7f-7c3a69a29325",
+      "sourcePort": "552d393f-ec30-4497-b9d9-d768b2bcefd2",
+      "target": "068acf93-ef43-491a-8763-ff47c2a3a88d",
+      "targetPort": "55e486b2-9e82-466c-a584-dce0a9619fe6",
+      "points": [
+        {
+          "id": "d379ef2c-5f6c-4a10-9d70-319cf0b8dcb3",
+          "_class": "PointModel",
+          "selected": false,
+          "x": 104.5,
+          "y": 323.5
+        },
+        {
+          "id": "bfb72231-e2a9-4600-b3b6-92d8336de04a",
+          "_class": "PointModel",
+          "selected": true,
+          "x": 223,
+          "y": 267
+        }
+      ],
+      "extras": {}
+    }
+  ],
+  "nodes": [
+    {
+      "id": "7706d1e3-a6dd-469e-9d7f-7c3a69a29325",
+      "_class": "StopperNodeModel",
+      "selected": false,
+      "type": "stopper",
+      "x": 95,
+      "y": 275,
+      "extras": {},
+      "ports": [
+        {
+          "id": "552d393f-ec30-4497-b9d9-d768b2bcefd2",
+          "_class": "DefaultPortModel",
+          "selected": false,
+          "name": "input",
+          "parentNode": "7706d1e3-a6dd-469e-9d7f-7c3a69a29325",
+          "links": [
+            "bebdc0e6-7cfa-42cb-840d-5c144359710f"
+          ],
+          "in": true,
+          "label": "In"
+        }
+      ],
+      "name": "stopper1",
+      "color": "rgb(192, 255, 0)"
+    },
+    {
+      "id": "068acf93-ef43-491a-8763-ff47c2a3a88d",
+      "_class": "StopperNodeModel",
+      "selected": false,
+      "type": "stopper",
+      "x": 215,
+      "y": 219,
+      "extras": {},
+      "ports": [
+        {
+          "id": "55e486b2-9e82-466c-a584-dce0a9619fe6",
+          "_class": "DefaultPortModel",
+          "selected": false,
+          "name": "input",
+          "parentNode": "068acf93-ef43-491a-8763-ff47c2a3a88d",
+          "links": [
+            "bebdc0e6-7cfa-42cb-840d-5c144359710f"
+          ],
+          "in": true,
+          "label": "In"
+        }
+      ],
+      "name": "stopper2",
+      "color": "rgb(192, 255, 0)"
+    }
+  ]
+}
