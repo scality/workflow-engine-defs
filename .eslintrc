@@ -1,46 +1,58 @@
 {
-    "extends": "scality",
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true,
+            "modules": true,
+            "experimentalObjectRestSpread": true,
+            "impliedStrict": true
+        }
+    },
+    "plugins": [
+        "flowtype",
+        "flowtype-errors",
+        "import"
+    ],
     "rules": {
-        "lines-around-directive": "off",
-        "no-underscore-dangle": "off",
-        "indent": "off",
-        "object-curly-newline": "off",
-        "operator-linebreak": "off",
-        "function-paren-newline": "off",
-        "import/newline-after-import": "off",
-        "prefer-destructuring": "off",
-        "implicit-arrow-linebreak": "off",
-        "no-bitwise": "off",
-        "dot-location": "off",
-        "comma-dangle": "off",
-        "no-undef-init": "off",
-        "global-require": "off",
-        "import/no-dynamic-require": "off",
-        "class-methods-use-this": "off",
-        "no-plusplus": "off",
-        "no-else-return": "off",
-        "object-property-newline": "off",
-        "import/order": "off",
-        "no-continue": "off",
-        "no-tabs": "off",
-        "lines-between-class-members": "off",
-        "prefer-spread": "off",
-        "no-lonely-if": "off",
-        "no-useless-escape": "off",
-        "no-restricted-globals": "off",
-        "no-buffer-constructor": "off",
-        "import/no-extraneous-dependencies": "off",
-        "space-unary-ops": "off",
-        "no-useless-return": "off",
-        "no-unexpected-multiline": "off",
-        "no-mixed-operators": "off",
-        "newline-per-chained-call": "off",
-        "operator-assignment": "off",
-        "spaced-comment": "off",
-        "comma-style": "off",
-        "no-restricted-properties": "off",
-        "new-parens": "off",
-        "no-multi-spaces": "off",
-        "quote-props": "off"
+        "semi": "error",
+        "indent": "error",
+        "no-var": "error",
+        "no-trailing-spaces": "error",
+        "no-extra-bind": "error",
+        "comma-dangle": [ "error", "always-multiline" ],
+        "keyword-spacing": [ "error", { "before": true } ],
+        "eol-last": "error",
+        "sort-imports": "error",
+        "eqeqeq": "error",
+        "no-useless-rename": "error",
+        "no-const-assign": "error",
+        "no-dupe-class-members": "error",
+        "prefer-arrow-callback": "error",
+        "quotes": ["error", "single"],
+        "flowtype-errors/show-errors": 2,
+        "flowtype-errors/show-warnings": 1,
+        "flowtype-errors/enforce-min-coverage": ["error", 30],
+        "flowtype/semi": "error",
+        "flowtype/delimiter-dangle": ["error", "always-multiline"],
+        "flowtype/union-intersection-spacing": "error",
+        "flowtype/space-after-type-colon": "error",
+        "flowtype/type-import-style": ["error", "declaration"],
+        "flowtype/type-id-match": ["error", "^([A-Z][a-zA-Z0-9]*)$"],
+        "flowtype/no-dupe-keys": "error",
+        "import/no-duplicates": "warn"
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:flowtype/recommended"
+    ],
+    "settings": {
+        "flowtype": {
+            "onlyFilesWithFlowAnnotation": true
+        }
+    },
+    "globals": {
+        "global": true
     }
 }

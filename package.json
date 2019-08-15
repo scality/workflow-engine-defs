@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha test/unit",
-    "lint": "eslint $(git ls-files '*.js')"
+    "lint": "eslint $(git ls-files 'src/*.js')",
+    "build": "babel src/ -d lib/",
+    "prepublish": "yarn run build"
   },
   "repository": {
     "type": "git",
@@ -22,10 +24,17 @@
   },
   "homepage": "https://github.com/vrancurel/workflow-engine-defs#readme",
   "devDependencies": {
-    "eslint": "^5.3.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-config-scality": "scality/Guidelines#1d6f287b",
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-flow": "^7.0.0",
+    "eslint": "^6.1.0",
     "eslint-plugin-import": "^2.14.0",
+    "flow-bin": "^0.105.2",
     "mocha": "^5.2.0"
+  },
+  "dependencies": {
+    "babel-eslint": "^10.0.2",
+    "eslint-plugin-flowtype": "^4.2.0",
+    "eslint-plugin-flowtype-errors": "^4.1.0"
   }
 }

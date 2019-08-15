@@ -10,11 +10,8 @@ describe('test', () => {
         const wed = new WorkflowEngineDefs();
         assert(wed);
         wed.setModel(wed.generateNewModel('foo'));
-        try {
-            wed.checkModel();
-        } catch (err) {
-            assert.ifError(err);
-        }
+        const validationResult = wed.checkModel();
+        assert(validationResult.isValid);
     });
     it('should list data sub-types', () => {
         const wed = new WorkflowEngineDefs();
@@ -23,40 +20,26 @@ describe('test', () => {
     it('empty workflow is valid', () => {
         const model = require('./EmptyWorkflowOK');
         const wed = new WorkflowEngineDefs(model);
-        try {
-            wed.checkModel();
-        } catch (err) {
-            assert.ifError(err);
-        }
+        const validationResult = wed.checkModel();
+        assert(validationResult.isValid);
     });
     it('should validate the model', () => {
         const model = require('./TinyWorkflowOK');
         const wed = new WorkflowEngineDefs(model);
-        try {
-            wed.checkModel();
-        } catch (err) {
-            assert.ifError(err);
-        }
+        const validationResult = wed.checkModel();
+        assert(validationResult.isValid);
     });
     it('should allow only one source', () => {
         const model = require('./TwoSources');
         const wed = new WorkflowEngineDefs(model);
-        let foundErr = false;
-        try {
-            wed.checkModel();
-        } catch (err) {
-            foundErr = true;
-        }
-        assert(foundErr);
+        const validationResult = wed.checkModel();
+        assert(!validationResult.isValid);
     });
     it('should validate decisions', () => {
         const model = require('./Decision');
         const wed = new WorkflowEngineDefs(model);
-        try {
-            wed.checkModel();
-        } catch (err) {
-            assert.ifError(err);
-        }
+        const validationResult = wed.checkModel();
+        assert(validationResult.isValid);
         const node = wed.findNode('73594f64-8aa4-484f-aa93-9d3ae4ea242f');
         assert(node !== undefined);
         const trueNodes = wed.findNextNodes(node, 'output');
@@ -69,55 +52,34 @@ describe('test', () => {
     it('should not validate the model because ports with no links', () => {
         const model = require('./PortHasNoLink');
         const wed = new WorkflowEngineDefs(model);
-        let foundErr = false;
-        try {
-            wed.checkModel();
-        } catch (err) {
-            foundErr = true;
-        }
-        assert(foundErr);
+        const validationResult = wed.checkModel();
+        assert(!validationResult.isValid);
     });
     it('should not validate the model because missing node ID', () => {
         const model = require('./MissingNodeID');
         const wed = new WorkflowEngineDefs(model);
-        let foundErr = false;
-        try {
-            wed.checkModel();
-        } catch (err) {
-            foundErr = true;
-        }
-        assert(foundErr);
+        const validationResult = wed.checkModel();
+        assert(!validationResult.isValid);
     });
     it('should be cyclic', () => {
         const model = require('./CyclicWorkflow');
         const wed = new WorkflowEngineDefs(model);
-        let foundErr = false;
-        try {
-            wed.checkModel();
-        } catch (err) {
-            foundErr = true;
-        }
-        assert(foundErr);
+        const validationResult = wed.checkModel();
+        assert(!validationResult.isValid);
     });
     it('find source nodes', () => {
         const model = require('./FindSourceNodes');
         const wed = new WorkflowEngineDefs(model);
-        try {
-            wed.checkModel();
-        } catch (err) {
-            assert.ifError(err);
-        }
+        const validationResult = wed.checkModel();
+        assert(validationResult.isValid);
         const sourceNodes = wed.findNodes(wed.TYPE_DATA);
         assert(sourceNodes.length === 1);
     });
     it('find 3 next nodes', () => {
         const model = require('./ThreeNextNodes');
         const wed = new WorkflowEngineDefs(model);
-        try {
-            wed.checkModel();
-        } catch (err) {
-            assert.ifError(err);
-        }
+        const validationResult = wed.checkModel();
+        assert(validationResult.isValid);
         const sourceNodes = wed.findNodes(wed.TYPE_DATA);
         assert(sourceNodes.length === 1);
         const nextNodes = wed.findNextNodes(sourceNodes[0]);
@@ -129,11 +91,8 @@ describe('test', () => {
     it('find 3 next nodes 2', () => {
         const model = require('./ThreeNextNodes2');
         const wed = new WorkflowEngineDefs(model);
-        try {
-            wed.checkModel();
-        } catch (err) {
-            assert.ifError(err);
-        }
+        const validationResult = wed.checkModel();
+        assert(validationResult.isValid);
         const node = wed.findNodeByName('test');
         assert(node !== undefined);
         const nextNodes = wed.findNextNodes(node);
@@ -145,11 +104,8 @@ describe('test', () => {
     it('find prev nodes', () => {
         const model = require('./MultiInput');
         const wed = new WorkflowEngineDefs(model);
-        try {
-            wed.checkModel();
-        } catch (err) {
-            assert.ifError(err);
-        }
+        const validationResult = wed.checkModel();
+        assert(validationResult.isValid);
         const node = wed.findNodeByName('end');
         assert(node !== undefined);
         const prevNodes = wed.findPrevNodes(node);
@@ -160,11 +116,8 @@ describe('test', () => {
     it('find prev nodes 2', () => {
         const model = require('./Multi3Input');
         const wed = new WorkflowEngineDefs(model);
-        try {
-            wed.checkModel();
-        } catch (err) {
-            assert.ifError(err);
-        }
+        const validationResult = wed.checkModel();
+        assert(validationResult.isValid);
         const node = wed.findNodeByName('end');
         assert(node !== undefined);
         const prevNodes = wed.findPrevNodes(node);
@@ -176,45 +129,25 @@ describe('test', () => {
     it('reject links pointing to nowhere', () => {
         const model = require('./LinkNowhere.json');
         const wed = new WorkflowEngineDefs(model);
-        let foundErr = false;
-        try {
-            wed.checkModel();
-        } catch (err) {
-            foundErr = true;
-        }
-        assert(foundErr);
+        const validationResult = wed.checkModel();
+        assert(!validationResult.isValid);
     });
     it('reject out-to-out links', () => {
         const model = require('./OutToOut.json');
         const wed = new WorkflowEngineDefs(model);
-        let foundErr = false;
-        try {
-            wed.checkModel();
-        } catch (err) {
-            foundErr = true;
-        }
-        assert(foundErr);
+        const validationResult = wed.checkModel();
+        assert(!validationResult.isValid);
     });
     it('reject in-to-in links', () => {
         const model = require('./InToIn.json');
         const wed = new WorkflowEngineDefs(model);
-        let foundErr = false;
-        try {
-            wed.checkModel();
-        } catch (err) {
-            foundErr = true;
-        }
-        assert(foundErr);
+        const validationResult = wed.checkModel();
+        assert(!validationResult.isValid);
     });
     it('reject inverted links', () => {
         const model = require('./InvertedLink.json');
         const wed = new WorkflowEngineDefs(model);
-        let foundErr = false;
-        try {
-            wed.checkModel();
-        } catch (err) {
-            foundErr = true;
-        }
-        assert(foundErr);
+        const validationResult = wed.checkModel();
+        assert(!validationResult.isValid);
     });
 });
