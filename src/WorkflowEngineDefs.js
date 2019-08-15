@@ -1,5 +1,82 @@
+// @flow
+
+type WorkflowEnginePoint = {
+    id: string,
+    _class: string,
+    selected: boolean,
+    x: number,
+    y: number,
+};
+
+type WorkflowEngineLink = {
+    id: string,
+    _class: string,
+    selected: boolean,
+    type: string,
+    source: string,
+    sourcePort: string,
+    target: string,
+    targetPort: string,
+    points: Array<WorkflowEnginePoint>,
+    extras: {},
+};
+
+type WorkflowEnginePort = {
+    id: string,
+    _class: string,
+    selected: boolean,
+    name: string,
+    parentNode: string,
+    links: Array<string>,
+    in: boolean,
+    label: string,
+};
+
+type WorkflowEngineNode = {
+    id: string,
+    _class: string,
+    selected: boolean,
+    type: string,
+    x: number,
+    y: number,
+    extras: {},
+    ports: Array<WorkflowEnginePort>,
+    name: string,
+    color: string,
+    // extensions from react-js-diagrams:
+    subType: string,
+    script: string,
+    key: string,
+    value: string,
+    cronRule: string,
+    operator: string,
+    func: string,
+    asynchronous: boolean,
+    endpoint: string,
+    postData: boolean,
+};
+
+type WorkflowEngineModel = {
+    offsetX: number,
+    offsetY: number,
+    nameCounter: number,
+    zoom: number,
+    links: Array<WorkflowEngineLink>,
+    nodes: Array<WorkflowEngineNode>,
+};
+
+type WorkflowEngineValidationResult = {
+    isValid: boolean,
+};
+
+type WorkflowEngineValidationError = {
+    isValid: boolean,
+    message: string,
+};
+
 class WorkflowEngineDefs {
-    // node types
+    model: WorkflowEngineModel;
+
     get TYPE_DATA() {
         return 'data';
     }
@@ -28,10 +105,6 @@ class WorkflowEngineDefs {
         return 'update';
     }
 
-    // sub-types
-    // data sub-types
-    // search sub-types
-    // tag & decision sub-types
     get SUB_TYPE_BASIC() {
         return 'basic';
     }
@@ -40,7 +113,6 @@ class WorkflowEngineDefs {
         return 'advanced';
     }
 
-    // function sub-types
     get SUB_TYPE_FISSION() {
         return 'fission';
     }
@@ -57,14 +129,10 @@ class WorkflowEngineDefs {
         return 'google_cloud_function';
     }
 
-    // target sub-types
-
-    // special tags
     get _GUARD() {
         return '_ZENKO_WORKFLOW_GUARD';
     }
 
-    // getters
     get dataSubTypes() {
         return [this.SUB_TYPE_BASIC, this.SUB_TYPE_ADVANCED];
     }
@@ -87,9 +155,9 @@ class WorkflowEngineDefs {
 
     get functionSubTypes() {
         return [this.SUB_TYPE_FISSION,
-                this.SUB_TYPE_AWS_LAMBDA,
-                this.SUB_TYPE_AZURE_FUNCTION,
-                this.SUB_TYPE_GOOGLE_CLOUD_FUNCTION];
+            this.SUB_TYPE_AWS_LAMBDA,
+            this.SUB_TYPE_AZURE_FUNCTION,
+            this.SUB_TYPE_GOOGLE_CLOUD_FUNCTION];
     }
 
     get stopperSubTypes() {
@@ -100,7 +168,6 @@ class WorkflowEngineDefs {
         return [];
     }
 
-    // default subTypes
     getDefaultDataSubType() {
         return this.dataSubTypes[0];
     }
@@ -122,14 +189,14 @@ class WorkflowEngineDefs {
     }
 
     getDefaultStopperSubType() {
-        return undefined;
+        return '';
     }
 
     getDefaultUpdateSubType() {
-        return undefined;
+        return '';
     }
 
-    constructor(model = {}) {
+    constructor(model: WorkflowEngineModel = {}) {
         this.model = model;
     }
 
@@ -140,11 +207,11 @@ class WorkflowEngineDefs {
             nameCounter: 0,
             zoom: 100,
             links: [],
-            nodes: []
+            nodes: [],
         };
     }
 
-    setModel(model) {
+    setModel(model: WorkflowEngineModel) {
         this.model = model;
     }
 
@@ -154,7 +221,7 @@ class WorkflowEngineDefs {
      *
      * @return {object} node if found else null
      */
-    findNode(nodeId) {
+    findNode(nodeId: string): ?WorkflowEngineNode {
         // eslint-disable-next-line no-restricted-syntax
         for (const node of this.model.nodes) {
             if (node.id === nodeId) {
@@ -170,7 +237,7 @@ class WorkflowEngineDefs {
      *
      * @return {object} node if found else null
      */
-    findNodeByName(name) {
+    findNodeByName(name: string): ?WorkflowEngineNode {
         // eslint-disable-next-line no-restricted-syntax
         for (const node of this.model.nodes) {
             if (node.name === name) {
@@ -186,7 +253,7 @@ class WorkflowEngineDefs {
      *
      * @return {array} nodes if found else []
      */
-    findNodes(type) {
+    findNodes(type: string): Array<WorkflowEngineNode> {
         const nodes = [];
         // eslint-disable-next-line no-restricted-syntax
         for (const node of this.model.nodes) {
@@ -205,7 +272,7 @@ class WorkflowEngineDefs {
      *
      * @return {array} nodes if found else []
      */
-    findNextNodes(refNode, name = undefined) {
+    findNextNodes(refNode: WorkflowEngineNode, name: ?string): Array<string> {
         const nextNodes = [];
         // eslint-disable-next-line no-restricted-syntax
         for (const port of refNode.ports) {
@@ -238,7 +305,7 @@ class WorkflowEngineDefs {
      *
      * @return {array} nodes if found else []
      */
-    findPrevNodes(refNode, name = undefined) {
+    findPrevNodes(refNode: WorkflowEngineNode, name: ?string): Array<string> {
         const prevNodes = [];
         // eslint-disable-next-line no-restricted-syntax
         for (const port of refNode.ports) {
@@ -269,7 +336,7 @@ class WorkflowEngineDefs {
      *
      * @return {object} link if found else null
      */
-    findLink(linkId) {
+    findLink(linkId: string): ?WorkflowEngineLink {
         // eslint-disable-next-line no-restricted-syntax
         for (const link of this.model.links) {
             if (link.id === linkId) {
@@ -286,7 +353,7 @@ class WorkflowEngineDefs {
      *
      * @return {object} port if found else null
      */
-    findNodePort(node, portId) {
+    findNodePort(node: WorkflowEngineNode, portId: string): ?WorkflowEnginePort {
         // eslint-disable-next-line no-restricted-syntax
         for (const port of node.ports) {
             if (port.id === portId) {
@@ -296,7 +363,7 @@ class WorkflowEngineDefs {
         return null;
     }
 
-    _isCyclicInternal(node, visited, nodeStack) {
+    _isCyclicInternal(node: WorkflowEngineNode, visited: {}, nodeStack: {}): boolean {
         // we assume model has been checkModel() previously
         if (visited[node.id] === undefined) {
             // eslint-disable-next-line no-param-reassign
@@ -320,7 +387,7 @@ class WorkflowEngineDefs {
                         if (_node) {
                             if (!(visited[_node.id] === true) &&
                                 this._isCyclicInternal(_node, visited,
-                                                       nodeStack)) {
+                                    nodeStack)) {
                                 return true;
                             } else if (nodeStack[_node.id] === true) {
                                 return true;
@@ -339,7 +406,7 @@ class WorkflowEngineDefs {
      *
      * @returns {boolean} true if graph is cyclic
      */
-    _isCyclic() {
+    _isCyclic(): boolean {
         const visited = {};
         const nodeStack = {};
         // eslint-disable-next-line no-restricted-syntax
@@ -355,167 +422,266 @@ class WorkflowEngineDefs {
      *
      * @return {undefined}
      */
-    checkModel() {
+    checkModel(): WorkflowEngineValidationResult | WorkflowEngineValidationError {
         let foundSource = false;
         // check nodes
         // eslint-disable-next-line no-restricted-syntax
         for (const node of this.model.nodes) {
             // every node shall have an ID
             if (node.id === undefined) {
-                throw new Error('missing node id');
+                return {
+                    isValid: false,
+                    message: 'missing node id',
+                };
             }
             // check that types have their own properties
             if (node.type === undefined) {
-                throw new Error('missing node type');
+                return {
+                    isValid: false,
+                    message: 'missing node type',
+                };
             }
             if (node.type === this.TYPE_DATA) {
                 if (foundSource) {
-                    throw new Error(
-                        `\"${node.name}\" only one source per workflow`);
+                    return {
+                        isValid: false,
+                        message:
+                        `"${node.name}" only one source per workflow`,
+                    };
                 }
                 if (node.subType === this.SUB_TYPE_ADVANCED) {
                     if (node.script === undefined) {
-                        throw new Error(
-                            `\"${node.name}\" data missing filter script`);
+                        return {
+                            isValid: false,
+                            message:
+                            `"${node.name}" data missing filter script`,
+                        };
                     }
                 } else if (node.subType === this.SUB_TYPE_BASIC) {
                     if (node.key === undefined) {
-                        throw new Error(
-                            `\"${node.name}\" data missing bucket`);
+                        return {
+                            isValid: false,
+                            message:
+                            `"${node.name}" data missing bucket`,
+                        };
                     }
                     // value can actually be undefined meaning *
                 } else {
-                    throw new Error(
-                        `\"${node.name}\": ${node.subType} not supported`);
+                    return {
+                        isValid: false,
+                        message:
+                        `"${node.name}": ${node.subType} not supported`,
+                    };
                 }
                 foundSource = true;
             } else if (node.type === this.TYPE_SEARCH) {
                 if (foundSource) {
-                    throw new Error(
-                        `\"${node.name}\" only one source per workflow`);
+                    return {
+                        isValid: false,
+                        message:
+                        `"${node.name}" only one source per workflow`,
+                    };
                 }
                 if (node.subType === this.SUB_TYPE_ADVANCED) {
                     // bucket is mandatory for search
                     if (node.key === undefined) {
-                        throw new Error(
-                            `\"${node.name}\" search missing key`);
+                        return {
+                            isValid: false,
+                            message:
+                            `"${node.name}" search missing key`,
+                        };
                     }
                     if (node.script === undefined) {
-                        throw new Error(
-                            `\"${node.name}\" search missing filter script`);
+                        return {
+                            isValid: false,
+                            message:
+                            `"${node.name}" search missing filter script`,
+                        };
                     }
                 } else if (node.subType === this.SUB_TYPE_BASIC) {
                     if (node.key === undefined) {
-                        throw new Error(
-                            `\"${node.name}\" search missing key`);
+                        return {
+                            isValid: false,
+                            message:
+                            `"${node.name}" search missing key`,
+                        };
                     }
                     // value can actually be undefined meaning *
                 } else {
-                    throw new Error(
-                        `\"${node.name}\": ${node.subType} not supported`);
+                    return {
+                        isValid: false,
+                        message:
+                        `"${node.name}": ${node.subType} not supported`,
+                    };
                 }
                 if (node.cronRule === undefined) {
-                    throw new Error(
-                        `\"${node.name}\" shall define cron rule`);
+                    return {
+                        isValid: false,
+                        message:
+                        `"${node.name}" shall define cron rule`,
+                    };
                 }
                 foundSource = true;
             } else if (node.type === this.TYPE_TAG) {
                 if (node.subType === this.SUB_TYPE_ADVANCED) {
                     if (node.script === undefined) {
-                        throw new Error(`\"${node.name}\" script missing`);
+                        return {
+                            isValid: false,
+                            message: `"${node.name}" script missing`,
+                        };
                     }
                 } else if (node.subType === this.SUB_TYPE_BASIC) {
                     if (node.key === undefined) {
-                        throw new Error(`\"${node.name}\" key missing`);
+                        return {
+                            isValid: false,
+                            message: `"${node.name}" key missing`,
+                        };
                     }
                     if (node.value === undefined) {
-                        throw new Error(`\"${node.name}\" value missing`);
+                        return {
+                            isValid: false,
+                            message: `"${node.name}" value missing`,
+                        };
                     }
                 } else {
-                    throw new Error(
-                        `\"${node.name}\": ${node.subType} not supported`);
+                    return {
+                        isValid: false,
+                        message:
+                        `"${node.name}": ${node.subType} not supported`,
+                    };
                 }
             } else if (node.type === this.TYPE_DECISION) {
                 if (node.subType === this.SUB_TYPE_ADVANCED) {
                     if (node.script === undefined) {
-                        throw new Error(`\"${node.name}\" script missing`);
+                        return {
+                            isValid: false,
+                            message: `"${node.name}" script missing`,
+                        };
                     }
                 } else if (node.subType === this.SUB_TYPE_BASIC) {
                     if (node.key === undefined) {
-                        throw new Error(`\"${node.name}\" key missing`);
+                        return {
+                            isValid: false,
+                            message: `"${node.name}" key missing`,
+                        };
                     }
                     if (node.value === undefined) {
-                        throw new Error(`\"${node.name}\" value missing`);
+                        return {
+                            isValid: false,
+                            message: `"${node.name}" value missing`,
+                        };
                     }
                     if (node.operator === undefined) {
-                        throw new Error(`\"${node.name}\" operator missing`);
+                        return {
+                            isValid: false,
+                            message: `"${node.name}" operator missing`,
+                        };
                     }
                 } else {
-                    throw new Error(
-                        `\"${node.name}\": ${node.subType} not supported`);
+                    return {
+                        isValid: false,
+                        message:
+                        `"${node.name}": ${node.subType} not supported`,
+                    };
                 }
             } else if (node.type === this.TYPE_FUNCTION) {
                 if (node.subType === this.SUB_TYPE_FISSION) {
                     if (node.func === undefined) {
-                        throw new Error(
-                            `\"${node.name}\" func must be defined`);
+                        return {
+                            isValid: false,
+                            message:
+                            `"${node.name}" func must be defined`,
+                        };
                     }
                     if (node.asynchronous === undefined) {
-                        throw new Error(
-                            `\"${node.name}\" asynchronous not defined`);
+                        return {
+                            isValid: false,
+                            message:
+                            `"${node.name}" asynchronous not defined`,
+                        };
                     }
                 } else if (node.subType === this.SUB_TYPE_AZURE_FUNCTION) {
                     if (node.func === undefined) {
-                        throw new Error(
-                            `\"${node.name}\" func must be defined`);
+                        return {
+                            isValid: false,
+                            message:
+                            `"${node.name}" func must be defined`,
+                        };
                     }
                     if (node.endpoint === undefined) {
-                        throw new Error(
-                            `\"${node.name}\" endpoint must be defined`);
+                        return {
+                            isValid: false,
+                            message:
+                            `"${node.name}" endpoint must be defined`,
+                        };
                     }
                     if (node.postData === undefined) {
-                        throw new Error(
-                            `\"${node.name}\" postData not defined`);
+                        return {
+                            isValid: false,
+                            message:
+                            `"${node.name}" postData not defined`,
+                        };
                     }
                 } else {
-                    throw new Error(
-                        `\"${node.name}\": ${node.subType} not supported`);
+                    return {
+                        isValid: false,
+                        message:
+                        `"${node.name}": ${node.subType} not supported`,
+                    };
                 }
             } else if (node.type === this.TYPE_STOPPER) {
                 // OK
             } else if (node.type === this.TYPE_UPDATE) {
                 // OK
             } else {
-                throw new Error(`\"${node.name}\": ${node.type} not supported`);
+                return {
+                    isValid: false,
+                    message: `"${node.name}": ${node.type} not supported`,
+                };
             }
             // every node shall have ports
             if (node.ports === undefined) {
-                throw new Error(`\"${node.name}\" has no ports`);
+                return {
+                    isValid: false,
+                    message: `"${node.name}" has no ports`,
+                };
             }
             // eslint-disable-next-line no-restricted-syntax
             for (const port of node.ports) {
                 // every port shall have an ID
                 if (port.id === undefined) {
-                    throw new Error(`\"${node.name}\" has missing port id`);
+                    return {
+                        isValid: false,
+                        message: `"${node.name}" has missing port id`,
+                    };
                 }
                 // port parentNode shall match node ID
                 if (port.parentNode !== node.id) {
-                    throw new Error(`\"${node.name}\" parentNode ID mismatch`);
+                    return {
+                        isValid: false,
+                        message: `"${node.name}" parentNode ID mismatch`,
+                    };
                 }
                 // every port shall have links
                 if (port.links === undefined) {
-                    throw new Error(`\"${node.name}\" missing port links`);
+                    return {
+                        isValid: false,
+                        message: `"${node.name}" missing port links`,
+                    };
                 }
                 // a port must have at least one link
                 if (port.links.length === 0) {
-                    throw new Error(`\"${node.name}\" port has no link`);
+                    return {
+                        isValid: false,
+                        message: `"${node.name}" port has no link`,
+                    };
                 }
                 // eslint-disable-next-line no-restricted-syntax
                 for (const linkId of port.links) {
                     // link shall point to a valid link
                     if (this.findLink(linkId) === null) {
                         throw new
-                        Error(`\"${node.name}\" ${linkId} is not a valid link`);
+                        Error(`"${node.name}" ${linkId} is not a valid link`);
                     }
                 }
             }
@@ -525,45 +691,77 @@ class WorkflowEngineDefs {
         for (const link of this.model.links) {
             // every link shall have an ID
             if (link.id === undefined) {
-                throw new Error('missing link ID');
+                return {
+                    isValid: false,
+                    message: 'missing link ID',
+                };
             }
             // check that source is a legit node
             let node = this.findNode(link.source);
             if (node) {
                 const sourcePort = this.findNodePort(node, link.sourcePort);
                 // check that sourcePort is a port of the source node
-                if (sourcePort === null) {
-                    throw new Error('link source port invalid');
-                }
-                // check port name
-                if (sourcePort.name !== 'output' &&
-                    sourcePort.name !== 'output2') {
-                    throw new Error('source port must be an output port');
+                // eslint-disable-next-line
+                if (sourcePort != null) {
+                    // check port name
+                    if (sourcePort.name !== 'output' &&
+                        sourcePort.name !== 'output2') {
+                        return {
+                            isValid: false,
+                            message: 'source port must be an output port',
+                        };
+                    }
+                } else {
+                    return {
+                        isValid: false,
+                        message: 'link source port invalid',
+                    };
                 }
             } else {
-                throw new Error('link source invalid');
+                return {
+                    isValid: false,
+                    message: 'link source invalid',
+                };
             }
             // check that target is a legit nodes
             node = this.findNode(link.target);
             if (node) {
                 const targetPort = this.findNodePort(node, link.targetPort);
                 // check that targetPort is a port of the target node
-                if (targetPort === null) {
-                    throw new Error('link target invalid');
-                }
-                // check port name
-                if (targetPort.name !== 'input') {
-                    throw new Error('target port must be an input port');
+                // eslint-disable-next-line
+                if (targetPort != null) {
+                    // check port name
+                    if (targetPort.name !== 'input') {
+                        return {
+                            isValid: false,
+                            message: 'target port must be an input port',
+                        };
+                    }
+                } else {
+                    return {
+                        isValid: false,
+                        message: 'link target invalid',
+                    };
                 }
             } else {
-                throw new Error('link target port invalid');
+                return {
+                    isValid: false,
+                    message: 'link target port invalid',
+                };
             }
         }
         // check if model is cyclic
         if (this._isCyclic()) {
-            throw new Error('model is cyclic');
+            return {
+                isValid: false,
+                message: 'model is cyclic',
+            };
         }
+        return {
+            isValid: true,
+        };
     }
 }
 
+// eslint-disable-next-line
 module.exports = WorkflowEngineDefs;
