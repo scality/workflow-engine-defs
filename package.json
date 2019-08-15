@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha test/unit",
     "lint": "eslint $(git ls-files 'src/*.js')",
-    "build": "babel src/ -d lib/",
+    "build": "babel src/ -d lib/;./node_modules/flow-copy-source/bin/flow-copy-source.js -v src lib",
     "prepublish": "yarn run build"
   },
   "repository": {
@@ -35,6 +35,7 @@
   "dependencies": {
     "babel-eslint": "^10.0.2",
     "eslint-plugin-flowtype": "^4.2.0",
-    "eslint-plugin-flowtype-errors": "^4.1.0"
+    "eslint-plugin-flowtype-errors": "^4.1.0",
+    "flow-copy-source": "^2.0.7"
   }
 }
