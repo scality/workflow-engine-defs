@@ -1,2 +1,2 @@
 # workflow-engine-defs
-Definitions for the Workflow Engine
+Definitions and Model for the Workflow Engine
