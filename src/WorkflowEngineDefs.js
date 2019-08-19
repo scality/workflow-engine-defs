@@ -222,7 +222,6 @@ class WorkflowEngineDefs {
      * @return {object} node if found else null
      */
     findNode(nodeId: string): ?WorkflowEngineNode {
-        // eslint-disable-next-line no-restricted-syntax
         for (const node of this.model.nodes) {
             if (node.id === nodeId) {
                 return node;
@@ -238,7 +237,6 @@ class WorkflowEngineDefs {
      * @return {object} node if found else null
      */
     findNodeByName(name: string): ?WorkflowEngineNode {
-        // eslint-disable-next-line no-restricted-syntax
         for (const node of this.model.nodes) {
             if (node.name === name) {
                 return node;
@@ -255,7 +253,6 @@ class WorkflowEngineDefs {
      */
     findNodes(type: string): Array<WorkflowEngineNode> {
         const nodes = [];
-        // eslint-disable-next-line no-restricted-syntax
         for (const node of this.model.nodes) {
             if (node.type === type) {
                 nodes.push(node);
@@ -274,7 +271,6 @@ class WorkflowEngineDefs {
      */
     findNextNodes(refNode: WorkflowEngineNode, name: ?string): Array<string> {
         const nextNodes = [];
-        // eslint-disable-next-line no-restricted-syntax
         for (const port of refNode.ports) {
             if (!port.in) {
                 if (name !== undefined) {
@@ -282,7 +278,6 @@ class WorkflowEngineDefs {
                         continue;
                     }
                 }
-                // eslint-disable-next-line no-restricted-syntax
                 for (const linkId of port.links) {
                     const link = this.findLink(linkId);
                     if (link) {
@@ -307,7 +302,6 @@ class WorkflowEngineDefs {
      */
     findPrevNodes(refNode: WorkflowEngineNode, name: ?string): Array<string> {
         const prevNodes = [];
-        // eslint-disable-next-line no-restricted-syntax
         for (const port of refNode.ports) {
             if (port.in) {
                 if (name !== undefined) {
@@ -315,7 +309,6 @@ class WorkflowEngineDefs {
                         continue;
                     }
                 }
-                // eslint-disable-next-line no-restricted-syntax
                 for (const linkId of port.links) {
                     const link = this.findLink(linkId);
                     if (link) {
@@ -337,7 +330,6 @@ class WorkflowEngineDefs {
      * @return {object} link if found else null
      */
     findLink(linkId: string): ?WorkflowEngineLink {
-        // eslint-disable-next-line no-restricted-syntax
         for (const link of this.model.links) {
             if (link.id === linkId) {
                 return link;
@@ -354,7 +346,6 @@ class WorkflowEngineDefs {
      * @return {object} port if found else null
      */
     findNodePort(node: WorkflowEngineNode, portId: string): ?WorkflowEnginePort {
-        // eslint-disable-next-line no-restricted-syntax
         for (const port of node.ports) {
             if (port.id === portId) {
                 return port;
@@ -371,9 +362,7 @@ class WorkflowEngineDefs {
             // eslint-disable-next-line no-param-reassign
             nodeStack[node.id] = true;
             // iterate over adjacent nodes
-            // eslint-disable-next-line no-restricted-syntax
             for (const port of node.ports) {
-                // eslint-disable-next-line no-restricted-syntax
                 for (const linkId of port.links) {
                     const link = this.findLink(linkId);
                     if (link) {
@@ -409,7 +398,6 @@ class WorkflowEngineDefs {
     _isCyclic(): boolean {
         const visited = {};
         const nodeStack = {};
-        // eslint-disable-next-line no-restricted-syntax
         for (const node of this.model.nodes) {
             if (this._isCyclicInternal(node, visited, nodeStack)) {
                 return true;
@@ -425,7 +413,6 @@ class WorkflowEngineDefs {
     checkModel(): WorkflowEngineValidationResult | WorkflowEngineValidationError {
         let foundSource = false;
         // check nodes
-        // eslint-disable-next-line no-restricted-syntax
         for (const node of this.model.nodes) {
             // every node shall have an ID
             if (node.id === undefined) {
@@ -646,7 +633,6 @@ class WorkflowEngineDefs {
                     message: `"${node.name}" has no ports`,
                 };
             }
-            // eslint-disable-next-line no-restricted-syntax
             for (const port of node.ports) {
                 // every port shall have an ID
                 if (port.id === undefined) {
@@ -676,7 +662,6 @@ class WorkflowEngineDefs {
                         message: `"${node.name}" port has no link`,
                     };
                 }
-                // eslint-disable-next-line no-restricted-syntax
                 for (const linkId of port.links) {
                     // link shall point to a valid link
                     if (this.findLink(linkId) === null) {
@@ -687,7 +672,6 @@ class WorkflowEngineDefs {
             }
         }
         // check links
-        // eslint-disable-next-line no-restricted-syntax
         for (const link of this.model.links) {
             // every link shall have an ID
             if (link.id === undefined) {
